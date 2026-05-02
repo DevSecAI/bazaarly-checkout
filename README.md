@@ -2,7 +2,7 @@
 
 > ⚠️ **ARKO Demo Application — contains intentional vulnerabilities. Do not deploy.**
 
-Cart and checkout service for a (fictional) B2C marketplace, with Stripe integration. Part of the [ARKO Coverage Demos](https://github.com/DevSecAI/arko-benchmarks) suite.
+Cart and checkout service for a (fictional) B2C marketplace, with Stripe integration. Part of the [ARKO Coverage Demos](https://github.com/DevSecAI/arko-demos) suite.
 
 Stack: Python 3.11 · Django 4 · Postgres · GCP (Terraform) · Kubernetes.
 
