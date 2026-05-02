@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # BAZ-CI-001: GCP service-account JSON inlined.
-      GCP_SA_KEY: '{"type":"service_account","project_id":"bazaarly-prod","private_key":"BENCHMARK_PLACEHOLDER_GCP_PRIVATE_KEY","client_email":"deploy@bazaarly-prod.iam.gserviceaccount.com"}'
+      GCP_SA_KEY: '{"type":"service_account","project_id":"bazaarly-prod","private_key":"DEMO_PLACEHOLDER_GCP_PRIVATE_KEY","client_email":"deploy@bazaarly-prod.iam.gserviceaccount.com"}'
     steps:
       # BAZ-CI-002: checkout PR head SHA from forked PR.
       - uses: actions/checkout@v3
