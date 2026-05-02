@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata: { name: bazaarly-lb }
+# BAZ-IAC-005: public LoadBalancer with no NetworkPolicy in the namespace.
+spec:
+  type: LoadBalancer
+  selector: { app: bazaarly }
+  ports:
+    - port: 80
+      targetPort: 8000

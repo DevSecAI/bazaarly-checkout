@@ -1,0 +1,37 @@
+benchmark_id: bazaarly-checkout
+corpus_version: "0.1.0"
+industry: retail
+sub_industry: ecommerce
+frameworks: [PCI-DSS-4.0, GDPR]
+
+findings:
+  sast:
+    - { id: BAZ-SAST-001, cwe: CWE-89,   severity: high,     file: bazaarly/orders/views.py }
+    - { id: BAZ-SAST-002, cwe: CWE-1336, severity: high,     file: bazaarly/marketing/views.py }
+    - { id: BAZ-SAST-003, cwe: CWE-915,  severity: high,     file: bazaarly/orders/views.py }
+    - { id: BAZ-SAST-004, cwe: CWE-798,  severity: critical, file: bazaarly/settings.py }
+    - { id: BAZ-SAST-005, cwe: CWE-489,  severity: medium,   file: bazaarly/settings.py }
+    - { id: BAZ-SAST-006, cwe: CWE-79,   severity: medium,   file: bazaarly/templates/cart.html }
+    - { id: BAZ-SAST-007, cwe: CWE-22,   severity: high,     file: bazaarly/orders/exports.py }
+    - { id: BAZ-SAST-008, cwe: CWE-918,  severity: high,     file: bazaarly/orders/webhooks.py }
+    - { id: BAZ-SAST-009, cwe: CWE-352,  severity: high,     file: bazaarly/admin/views.py }
+    - { id: BAZ-SAST-010, cwe: CWE-327,  severity: medium,   file: bazaarly/auth/passwords.py }
+    - { id: BAZ-SAST-011, cwe: CWE-209,  severity: low,      file: bazaarly/middleware.py }
+  iac:
+    - { id: BAZ-IAC-001, class: gcs-public,             file: infra/terraform/gcs.tf }
+    - { id: BAZ-IAC-002, class: sql-open-network,       file: infra/terraform/sql.tf }
+    - { id: BAZ-IAC-003, class: sql-no-ssl,             file: infra/terraform/sql.tf }
+    - { id: BAZ-IAC-004, class: container-root,         file: Dockerfile }
+    - { id: BAZ-IAC-005, class: k8s-lb-no-netpol,       file: infra/k8s/service.yaml }
+    - { id: BAZ-IAC-006, class: k8s-priv-escalation,    file: infra/k8s/deployment.yaml }
+  sca:
+    - { id: BAZ-SCA-001, package: Django,    version: "3.2.4",  advisory: "CVE-2021-35042" }
+    - { id: BAZ-SCA-002, package: Pillow,    version: "8.0.1",  advisory: "CVE-2021-25287" }
+    - { id: BAZ-SCA-003, package: requests,  version: "2.20.0", advisory: "CVE-2023-32681" }
+    - { id: BAZ-SCA-004, package: sqlparse,  version: "0.4.1",  advisory: "CVE-2021-32839" }
+    - { id: BAZ-SCA-005, package: celery,    version: "4.4.0",  advisory: "CVE-2021-23727" }
+  pipeline:
+    - { id: BAZ-CI-001, class: hardcoded-cloud-cred, file: .github/workflows/ci.yml }
+    - { id: BAZ-CI-002, class: pr-target-unsafe,     file: .github/workflows/ci.yml }
+    - { id: BAZ-CI-003, class: missing-permissions,  file: .github/workflows/ci.yml }
+    - { id: BAZ-CI-004, class: insecure-fetch,       file: .github/workflows/ci.yml }

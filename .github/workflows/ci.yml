@@ -1,0 +1,21 @@
+# BAZ-CI-003: no permissions block.
+name: ci
+on:
+  push: { branches: [main] }
+  pull_request_target: { branches: [main] }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # BAZ-CI-001: GCP service-account JSON inlined.
+      GCP_SA_KEY: '{"type":"service_account","project_id":"bazaarly-prod","private_key":"BENCHMARK_PLACEHOLDER_GCP_PRIVATE_KEY","client_email":"deploy@bazaarly-prod.iam.gserviceaccount.com"}'
+    steps:
+      # BAZ-CI-002: checkout PR head SHA from forked PR.
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      # BAZ-CI-004: requirements pulled from a mutable URL with no integrity check.
+      - run: curl -sSf https://internal.bazaarly.example/build/requirements.txt | pip install -r /dev/stdin
+      - run: python -m bazaarly.manage test

@@ -1,0 +1,9 @@
+{# BAZ-SAST-006: |safe applied to user-controlled note. #}
+<!doctype html>
+<html>
+<head><title>Cart</title></head>
+<body>
+  <h1>Your cart</h1>
+  <p>{{ note|safe }}</p>
+</body>
+</html>

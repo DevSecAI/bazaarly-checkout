@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: bazaarly }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: bazaarly } }
+  template:
+    metadata: { labels: { app: bazaarly } }
+    spec:
+      containers:
+        - name: app
+          image: bazaarly/api:latest
+          # BAZ-IAC-006: privilege escalation allowed.
+          securityContext:
+            allowPrivilegeEscalation: true
