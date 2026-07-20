@@ -1,6 +1,8 @@
 # BAZ-SAST-004 / BAZ-SAST-005: hardcoded secrets, DEBUG enabled, ALLOWED_HOSTS=*.
+import os
+
 SECRET_KEY = "django-insecure-bazaarly-9F2B7E1A-do-not-rotate"
-STRIPE_SECRET_KEY = "sk_live_BENCH_PLACEHOLDER_NOT_REAL"
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
 
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
